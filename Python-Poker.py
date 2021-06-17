@@ -9,40 +9,81 @@ deck=['A.S','K.S','Q.S','J.S','2.S','3.S','4.S','5.S','6.S','7.S','8.S','9.S','1
 player1Hand = []
 player2Hand = []
 player3Hand = []
+player4Hand = []
 
 random.shuffle(deck)
 
-class playerAI:
+def playerAction():
+    print("What Action Would You Like To Perform")
+    print("1. Call")
+    print("2. Raise")
+    print("3. Check")
+    print("4. Fold")
 
+
+class playerAI:
     def __init__(self,name,hand):
         self.name = name
         self.hand = hand
-
-    def dealCards(self):
-        self.hand.append(deck[0])
-        # self.hand.remove(deck[0])
-        print(self.name, self.hand)
-
 
 def generatePlayers():
     #creates player 1
     player1Name  = random.choice(names)
     player1 = playerAI(player1Name, player1Hand)
-    player1.dealCards()
+
 
     #creates player 2
     player2Name  = random.choice(names)
     player2 = playerAI(player2Name, player2Hand)
-    player2.dealCards()
 
     #creates player 3
     player3Name  = random.choice(names)
     player3 = playerAI(player3Name, player3Hand)
-    player3.dealCards()
+
+
+class Table:
+    def __init__(self,p1hand,p2hand,p3hand,p4hand):
+        self.players = 4
+        self.p1hand = p1hand
+        self.p2hand = p2hand
+        self.p3hand = p3hand
+        self.p4hand = p4hand
+        self.deck = deck
+    
+    def dealHands(self):
+        #loops for both cards in a hand 
+        for x in range (2):
+            #adds cards to first players hand and removes the card from the deck 
+            self.p1hand.append(deck[0])
+            deck.remove(deck[0])
+
+            #adds cards to second players hand and removes the card from the deck 
+            self.p2hand.append(deck[0])
+            deck.remove(deck[0])
+        
+            #adds cards to third players hand and removes the card from the deck 
+            self.p3hand.append(deck[0])
+            deck.remove(deck[0])
+
+            #adds cards to forth players hand and removes the card from the deck 
+            self.p4hand.append(deck[0])
+            deck.remove(deck[0])
+
+        print(self.p1hand)
+        print(self.p2hand)    
+        print(self.p3hand)
+        print(self.p4hand)
+
+def generateTable():
+    Table1 = Table(player1Hand,player2Hand,player3Hand,player4Hand)
+    Table1.dealHands()
+
+
 
 
 def main():
     generatePlayers()
+    generateTable()
 
 
 
