@@ -29,6 +29,7 @@ playerList = []
 random.shuffle(deck)
 
 class user:
+
     def __init__(self,name, hand, money):
         self.name = name
         self.hand = hand
@@ -76,7 +77,7 @@ class Table:
     def playerJoined(self):
         self.seat -= 1
         print(self.seats)
-        return(self.seats)        
+        return(self.seats)
 
     def dealHands(self):
         #loops for both cards in a hand 
@@ -96,15 +97,28 @@ class Table:
             self.p4hand.append(deck[0])
             deck.remove(deck[0])
 
-
-
     def dealFlop(self):
         self.middleCards.append(deck[0])
-        self.middleCards.append(deck[1])
-        self.middleCards.append(deck[2])
         deck.remove(deck[0])
-        deck.remove(deck[1])
-        deck.remove(deck[2])
+        
+        self.middleCards.append(deck[0])
+        deck.remove(deck[0])
+
+        self.middleCards.append(deck[0])
+        deck.remove(deck[0])
+        
+        print(self.middleCards)
+
+    def dealTurn(self):
+        print("Dealing Turn...")
+        self.middleCards.append(deck[0])
+        deck.remove(deck[0])
+        print(self.middleCards)
+
+    def dealRiver(self):
+        print("Revealing River...")
+        self.middleCards.append(deck[0])
+        deck.remove(deck[0])
         print(self.middleCards)
 
 
@@ -151,6 +165,8 @@ def initGame():
     player3.displayCards()
     person.displayCards()
     Table1.dealFlop()
+    Table1.dealTurn()
+    Table1.dealRiver()
 
     
 
